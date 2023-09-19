@@ -9,8 +9,8 @@ const app = express()
 dotenv.config({ path: './.env' })
 const port = process.env.PORT || 3000;
 
-app.use(router)
 app.use(express.json())   //to accept json from api
+app.use(router)
 
 
 const DB = process.env.DATABASE;
