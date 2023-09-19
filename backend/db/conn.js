@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 
-const connectDB=async()=>{
-    mongoose.connect("mongodb+srv://prashant23423:prashant@cluster0.ds9urdj.mongodb.net/?retryWrites=true&w=majority",{
+const connectDB=async(DB)=>{
+    mongoose.connect(DB,{
         useUnifiedTopology:true,
         useNewUrlParser:true,
          
