@@ -1,12 +1,13 @@
-const express = require("express")
+const express = require("express");
+const connectDB = require("./db/conn");
  
 
 const app = express()
 const port=process.env.PORT || 3000;
 
-app.use(express.json())
+app.use(express.json())   //to accept json from api
 
-
+connectDB()   //Mongo function called
 
 
 // --------------------MIDDLEWARE-----------------------------------
