@@ -1,7 +1,8 @@
 const dotenv = require("dotenv")
 const express = require("express");
 const connectDB = require("./db/conn");
-
+const User = require("./models/userSchema");
+ 
 
 const app = express()
 dotenv.config({ path: './.env' })
@@ -10,7 +11,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json())   //to accept json from api
 
 
-const DB=process.env.DATABASE;
+const DB = process.env.DATABASE;
 connectDB(DB)   //Mongo function called
 
 
