@@ -9,14 +9,22 @@ app.use(express.json())
 
 
 
-// -------------------------------------------------------
+// --------------------MIDDLEWARE-----------------------------------
+
+
+const middleware=(req,res,next)=>{
+    console.log("Middleware has happened")
+    next()
+}
+
+// -----------------------ROUTING--------------------------------
 
 
 app.get("/", (req, res) => {
     res.send(`Home page`)
 })
 
-app.get("/about", (req, res) => {
+app.get("/about",middleware, (req, res) => {
     res.send(`about page`)
 })
 
