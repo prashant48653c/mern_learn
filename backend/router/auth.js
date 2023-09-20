@@ -23,19 +23,23 @@ router.post("/register", async (req, res) => {
     try {
         const { name, email, phone, password, cpassword, work } = req.body
         if (!name || !email || !password || !cpassword || !work || !phone) {
-            res.status(400).send("Please fill the form carefully")
+            res.status(400).json("Please fill the form carefully")
         }
         if (password != cpassword) {
-            res.status(400).send("Confirm the password carefully")
+            res.status(400).json("Confirm the password carefully")
         }
         const existedEmail = await User.findOne({ email: email })
         if (existedEmail) {
-            res.status(400).send("Email already registered!")
+            res.status(400).json("Email already registered!")
         }
-        const newUser = new User({ name, email, phone, password, cpassword, work })
 
-        const result = await newUser.save()
-        res.status(201).send(result)
+
+            const newUser = new User({ name, email, phone, password, cpassword, work })
+            await newUser.save()
+            res.status(201).json({messege:"Succesfully registered"})
+        
+       
+
     } catch (error) {
         console.log(error)
         res.status(400).json( {error:"Cannot register"})
