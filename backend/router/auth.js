@@ -53,6 +53,9 @@ router.post("/register", async (req, res) => {
     }
 })
 
+
+
+
 router.post("/signin",async (req, res) => {
     try{
         const {email,password}= await req.body;
@@ -70,6 +73,12 @@ router.post("/signin",async (req, res) => {
 
         }else{
             const token=await existUser.generateAuthToken()
+            console.log(token)
+            res.cookie("jwt",token,{
+                expires:new Date(Date.now() + 25892000000),
+                httpOnly:true
+            })
+            
             res.status(201).json({ messege:"Succesfully logined"})
 
         }
