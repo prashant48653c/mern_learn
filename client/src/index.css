@@ -1,13 +1,16 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nunito:wght@700&display=swap');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: 0;
+  font-family: 'Segoe UI', Tahoma , Verdana, sans-serif;
 }
+:root{
+  --darkblue: #000080;
+  --lightblue:#89CFF0;
+  --head:#010002;
+  --para:#333333;
+}
+/* font-family: 'Black Han Sans', sans-serif;
+font-family: 'Nunito', sans-serif; */
