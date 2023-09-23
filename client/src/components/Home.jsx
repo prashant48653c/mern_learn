@@ -7,8 +7,8 @@ const Home = () => {
 
     <section className="hero-section">
         <div className="head-text">
-          <p>Welcome</p>    <br />
-            We are the MERN developer
+          <p>Welcome</p>   
+         <p>  We are the MERN developer</p> 
         </div>
     </section>
     

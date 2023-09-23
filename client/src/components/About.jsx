@@ -6,7 +6,7 @@ function About() {
   return (
     <div className="about-me-card">
       <div className="profile-header">
-        <img src={"https://upload.wikimedia.org/wikipedia/commons/3/32/Passport_Size_Image_of_Nouman.jpg"} alt="Profile" width={"250px"} className="profile-photo" />
+        <img src={" https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-social-media-user-vector-portrait-unknown-human-image-default-avatar-profile-flat-icon-184330869.jpg"} alt="Profile" width={"250px"} className="profile-photo" />
         <h2>{"Software Engineer"}</h2>
         <p>Ranking: {"1/10"}</p>
         <button className="edit-profile-button">Edit Profile</button>

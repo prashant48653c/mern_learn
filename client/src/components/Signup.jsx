@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
- 
+import axios from 'axios';
+
 
 function Signup() {
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,11 +18,15 @@ function Signup() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add form validation and submit logic here
     console.log(formData);
   };
+
+
+
+
+
 
   return (
     <div className="signup-form-container">
