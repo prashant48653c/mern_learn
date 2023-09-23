@@ -7,14 +7,9 @@ const jwt = require("jsonwebtoken")
 
 
 const router = express.Router()
-const middleware = (req, res, next) => {
-    console.log("Middleware has happened")
-    next()
-}
 
-router.get("/about", middleware, (req, res) => {
-    res.send(`about page `)
-})
+
+
 
 router.get("/contact", (req, res) => {
     res.send(`contact page`)
@@ -87,6 +82,12 @@ router.post("/signin", async (req, res) => {
         console.log(err)
     }
 
+})
+
+
+
+router.get("/about", (req, res) => {
+    res.send(`about page `)
 })
 
 
