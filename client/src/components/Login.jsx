@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
- 
+import { useNavigate } from 'react-router-dom';
+
 
 function Login() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -12,10 +14,28 @@ function Login() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can add form validation and login logic here
-    console.log(formData);
+    const { email, password } = formData;
+
+    const res = await fetch("http://localhost:3000/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email, password
+      })  
+    })
+
+    const data = await res.json();
+    if (!data ) {
+      window.alert("Login Declined")
+    } else {
+      window.alert("Login succesfull")
+
+      navigate("/")
+    }
   };
 
   return (
