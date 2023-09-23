@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 
 function Signup() {
+  const navigate=useNavigate()
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     password: '',
-    confirmPassword: '',
-    job: '',
+    cpassword: '',
+    work: '',
   });
 
   const handleChange = (e) => {
@@ -20,7 +23,25 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const { name, email, phone, password, cpassword, work } = formData;
+    const res=await fetch("http://localhost:3000/register",{
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        name, email, phone, password, cpassword, work 
+      })
+    })
+
+    const data=await res.json();
+    if(data.status === 400 || !data){
+      window.alert("Invalid registration")
+    }else{
+      window.alert("Registration succesfull")
+      navigate("/")
+    }
+
   };
 
 
@@ -31,7 +52,7 @@ function Signup() {
   return (
     <div className="signup-form-container">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} method='POST' >
         <div className="form-group">
           <label htmlFor="name">Your Name</label>
           <input
@@ -76,12 +97,12 @@ function Signup() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password</label>
+          <label htmlFor="cpassword">Confirm Password</label>
           <input
             type="password"
-            name="confirmPassword"
+            name="cpassword"
             id="confirmPassword"
-            value={formData.confirmPassword}
+            value={formData.cpassword}
             onChange={handleChange}
             required
           />
@@ -90,9 +111,9 @@ function Signup() {
           <label htmlFor="job">Job</label>
           <input
             type="text"
-            name="job"
+            name="work"
             id="job"
-            value={formData.job}
+            value={formData.work}
             onChange={handleChange}
           />
         </div>

@@ -3,13 +3,21 @@ const express = require("express");
 const connectDB = require("./db/conn");
 const User = require("./models/userSchema");
 const router = require("./router/auth");
+const cors=require("cors")
  
  
 const app = express()
 dotenv.config({ path: './.env' })
 const port = process.env.PORT || 3000;
 
-app.use(express.json())   //to accept json from api
+app.use(cors({
+origin:"http://localhost:5173",
+methods:"GET,HEAD,PUT,PATCH,POST,DELETE",
+credentials:true
+}));
+
+app.use(express.json()) 
+  //to accept json from api
 app.use(router)
 
 
