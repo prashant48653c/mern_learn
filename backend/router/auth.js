@@ -2,12 +2,13 @@ const { default: mongoose } = require("mongoose");
 const User = require("../models/userSchema");
 const express = require("express")
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-
+const jwt = require("jsonwebtoken");
+const Authenticate = require("../middleware/authenticate");
+const cookieParser=require("cookie-parser")
 
 
 const router = express.Router()
-
+router.use(cookieParser());
 
 
 
@@ -69,25 +70,27 @@ router.post("/signin", async (req, res) => {
         } else {
             const token = await existUser.generateAuthToken()
             console.log(token)
-            res.cookie("jwt", token, {
+            res.cookie("jwtoken", token, {
                 expires: new Date(Date.now() + 25892000000),
-                httpOnly: true
+                httpOnly: true,
+                credentials:"include"
             })
 
             res.status(201).json({ messege: "Succesfully logined" })
-
+console.log(req.cookies.jwt)
         }
     } catch (err) {
         res.status(404).json({ error: "Cannot login" })
         console.log(err)
     }
-
 })
 
 
 
-router.get("/about", (req, res) => {
-    res.send(`about page `)
+router.get("/about",Authenticate ,(req, res) => {
+    res.status(200).send(req.cookies.jwt)
+    
+   
 })
 
 

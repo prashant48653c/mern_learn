@@ -26,6 +26,7 @@ function Signup() {
     const { name, email, phone, password, cpassword, work } = formData;
     const res=await fetch("http://localhost:3000/register",{
       method:"POST",
+      credentials:"include",
       headers:{
         "Content-Type":"application/json"
       },

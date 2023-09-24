@@ -20,6 +20,7 @@ function Login() {
 
     const res = await fetch("http://localhost:3000/signin", {
       method: "POST",
+      credentials:"include",
       headers: {
         "Content-Type": "application/json"
       },
@@ -29,8 +30,9 @@ function Login() {
     })
 
     const data = await res.json();
-    if (!data ) {
+    if (!data || res.status=== 404 ) {
       window.alert("Login Declined")
+      
     } else {
       window.alert("Login succesfull")
 
