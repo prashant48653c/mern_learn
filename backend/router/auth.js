@@ -88,7 +88,7 @@ console.log(req.cookies.jwt)
 
 
 router.get("/about",Authenticate ,(req, res) => {
-    res.status(200).send(req.cookies.jwt)
+    res.status(200).send(req.rootUser)
     
    
 })

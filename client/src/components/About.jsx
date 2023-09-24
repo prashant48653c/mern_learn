@@ -1,8 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from "../assets/a.png"
+import { useNavigate } from 'react-router-dom';
 
 
 function About() {
+  const navigate=useNavigate()
+
+  const callAbout=async ()=>{
+    try{
+      const res=await fetch("http://localhost:3000/about",{
+        method:"GET",
+        headers:{
+          Accept:"application/json",
+          "Content-Type":"application/json",
+          
+        },
+        credentials:"include"
+      });
+      const data=await res.json();
+      console.log(data)
+      if(res.status != 200){
+        navigate("/login")
+      }
+
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    callAbout()
+  })
   return (
     <div className="about-me-card">
       <div className="profile-header">
