@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         required: true,
 
     },
-    messege:[
+    messeges:[
         {
         name: {
             type: String,
@@ -102,8 +102,17 @@ userSchema.methods.generateAuthToken = async function () {
     }
 }
 
-userSchema.methods.takeMessege=async function(){
+// storing the messege 
 
+userSchema.methods.takeMessege=async function(name,email,phone,feedback,location){
+try{
+    this.messeges=this.messeges.concat({name,email,feedback,phone,location})
+    await this.save()
+    return this.messeges
+
+}catch(err){
+    console.log(err)
+}
 }
 
 const User = mongoose.model("User", userSchema)

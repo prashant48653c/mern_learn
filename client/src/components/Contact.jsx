@@ -8,23 +8,28 @@ function Contact() {
   console.log(user)
 
   const [formData, setFormData] = useState({
-    name: '',
+    name: user.name,
     feedback: '',
-    phone: '',
-    email: '',
+    phone: user.phone,
+    email: user.email,
     location: '',
   });
+  console.log(formData)
 
   const handleChange = (e) => {
+    e.preventDefault();
+
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    console.log(formData)
   };
 
   const handleSubmit = async (e) => {
     try{
       e.preventDefault();
       const { name,email,phone,feedback,location }=formData;
-      const res =await fetch("",{
+      
+      const res =await fetch("http://localhost:3000/contact",{
        method:'POST',
        headers:{
          "Content-Type":"application/json"
@@ -36,6 +41,9 @@ function Contact() {
       const data=await res.json()
       console.log(data)
       setusermes(data)
+      if(data){
+        window.alert("Succesfully sent")
+      }
    
     }catch(err){
       console.log(err)
@@ -47,14 +55,14 @@ function Contact() {
   return (
     <div className="contact-form-container">
       <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
+      <form method='POST' onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Your Name</label>
           <input
             type="text"
             name="name"
             id="name"
-            value={user.name}
+            value={formData.name}
             onChange={handleChange}
             required
           />
@@ -76,7 +84,7 @@ function Contact() {
             type="tel"
             name="phone"
             id="phoneNumber"
-            value={user.phone}
+            value={formData.phone}
             onChange={handleChange}
             required
           />
@@ -87,7 +95,7 @@ function Contact() {
             type="email"
             name="email"
             id="userGmail"
-            value={user.email}
+            value={formData.email}
             onChange={handleChange}
             required
           />

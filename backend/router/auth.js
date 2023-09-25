@@ -4,7 +4,7 @@ const express = require("express")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const Authenticate = require("../middleware/authenticate");
-const cookieParser=require("cookie-parser")
+const cookieParser = require("cookie-parser")
 
 
 const router = express.Router()
@@ -12,19 +12,23 @@ router.use(cookieParser());
 
 
 
-router.get("/contact",Authenticate, async(req, res) => {
-    try{
-        const {name,email,feedback,phone,location}=req.body;
-        if(!name || !email || !feedback || !phone || !location){
-            res.status(404).json({error:"Fill the form carefully"})
+router.post("/contact", async (req, res) => {
+    try {
+        const { name, email, feedback, phone, location } = await req.body;
+        if (!name || !email || !feedback || !phone || !location) {
+            res.status(404).json({ error: "fill the form carefully" })
         }
 
-        const userContact= await User.findOne({_id:req.userID})
-if(userContact){
-    const messege=await userContact.takeMessege(name,email,phone,feedback,location);
-}
+        const userContact = await User.findOne({ _id: req.userID })
+        if (userContact) {
+            const messege = await userContact.takeMessege(name, email, phone, feedback, location);
+            await userContact.save()
+            res.status(201).json({ messege: "data added" })
+        }else{
+            res.status(400).json({messege:"Not done"})
+        }
 
-    }catch(err){
+    } catch (err) {
         res.status(400).send("Cannot send the messege")
     }
 })
@@ -86,11 +90,11 @@ router.post("/signin", async (req, res) => {
             res.cookie("jwtoken", token, {
                 expires: new Date(Date.now() + 25892000000),
                 httpOnly: true,
-                credentials:"include"
+                credentials: "include"
             })
 
             res.status(201).json({ messege: "Succesfully logined" })
-console.log(req.cookies.jwt)
+            console.log(req.cookies.jwt)
         }
     } catch (err) {
         res.status(404).json({ error: "Cannot login" })
@@ -100,10 +104,10 @@ console.log(req.cookies.jwt)
 
 
 
-router.get("/about",Authenticate ,(req, res) => {
+router.get("/about", Authenticate, (req, res) => {
     res.status(200).send(req.rootUser)
-    
-   
+
+
 })
 
 
