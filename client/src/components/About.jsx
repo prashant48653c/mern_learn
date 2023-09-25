@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from "../assets/a.png"
 import { useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../App';
 
 function About() {
-  const [user, setuser] = useState([])
+
   const navigate=useNavigate()
+
+  const {user,setuser} = useContext(UserContext);
+  console.log(user)
 
   const callAbout=async ()=>{
     try{

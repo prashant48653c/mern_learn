@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../App';
+
 
 
 function Contact() {
+  const {user,setuser} = useContext(UserContext);
+  console.log(user)
+
   const [formData, setFormData] = useState({
     name: '',
     
     feedback: '',
-    phoneNumber: '',
-    userGmail: '',
+    phone: '',
+    email: '',
     location: '',
   });
 
@@ -32,7 +37,7 @@ function Contact() {
             type="text"
             name="name"
             id="name"
-            value={formData.name}
+            value={user.name}
             onChange={handleChange}
             required
           />
@@ -52,9 +57,9 @@ function Contact() {
           <label htmlFor="phoneNumber">Phone Number</label>
           <input
             type="tel"
-            name="phoneNumber"
+            name="phone"
             id="phoneNumber"
-            value={formData.phoneNumber}
+            value={user.phone}
             onChange={handleChange}
           />
         </div>
@@ -62,9 +67,9 @@ function Contact() {
           <label htmlFor="userGmail">Your Gmail (optional)</label>
           <input
             type="email"
-            name="userGmail"
+            name="email"
             id="userGmail"
-            value={formData.userGmail}
+            value={user.email}
             onChange={handleChange}
           />
         </div>

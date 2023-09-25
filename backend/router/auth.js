@@ -12,7 +12,7 @@ router.use(cookieParser());
 
 
 
-router.get("/contact", (req, res) => {
+router.get("/contact",Authenticate, (req, res) => {
     res.send(`contact page`)
 })
 

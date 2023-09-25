@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 import Navbar from './components/Navbar'
 import  {BrowserRouter as Router, Route ,Routes} from 'react-router-dom'
@@ -9,11 +9,17 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Error from './components/Error'
  
+
+
+export const UserContext = createContext()
+ 
 function App() {
+  const [user, setuser] = useState([])
 
   return (
     <>
-  <Navbar/>
+ <UserContext.Provider value={{user, setuser}}>
+ <Navbar/>
     
       <Routes>
         
@@ -31,6 +37,8 @@ function App() {
     
 
       </Routes>
+ </UserContext.Provider>
+ 
     
   
     </>
