@@ -15,10 +15,12 @@ export const UserContext = createContext()
  
 function App() {
   const [user, setuser] = useState([])
+  const [userMes, setusermes] = useState([])
+
 
   return (
     <>
- <UserContext.Provider value={{user, setuser}}>
+ <UserContext.Provider value={{user,setusermes,userMes ,setuser}}>
  <Navbar/>
     
       <Routes>

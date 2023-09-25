@@ -12,8 +12,21 @@ router.use(cookieParser());
 
 
 
-router.get("/contact",Authenticate, (req, res) => {
-    res.send(`contact page`)
+router.get("/contact",Authenticate, async(req, res) => {
+    try{
+        const {name,email,feedback,phone,location}=req.body;
+        if(!name || !email || !feedback || !phone || !location){
+            res.status(404).json({error:"Fill the form carefully"})
+        }
+
+        const userContact= await User.findOne({_id:req.userID})
+if(userContact){
+    const messege=await userContact.takeMessege(name,email,phone,feedback,location);
+}
+
+    }catch(err){
+        res.status(400).send("Cannot send the messege")
+    }
 })
 
 

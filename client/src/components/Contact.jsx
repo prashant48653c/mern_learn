@@ -4,12 +4,11 @@ import { UserContext } from '../App';
 
 
 function Contact() {
-  const {user,setuser} = useContext(UserContext);
+  const {user,setuser,setusermes,userMes} = useContext(UserContext);
   console.log(user)
 
   const [formData, setFormData] = useState({
     name: '',
-    
     feedback: '',
     phone: '',
     email: '',
@@ -21,10 +20,28 @@ function Contact() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // You can add form submission logic here
-    console.log(formData);
+  const handleSubmit = async (e) => {
+    try{
+      e.preventDefault();
+      const { name,email,phone,feedback,location }=formData;
+      const res =await fetch("",{
+       method:'POST',
+       headers:{
+         "Content-Type":"application/json"
+       },
+       body:JSON.stringify({
+         name,email,feedback,phone,location
+       })
+      })
+      const data=await res.json()
+      console.log(data)
+      setusermes(data)
+   
+    }catch(err){
+      console.log(err)
+    }
+   
+
   };
 
   return (
@@ -61,16 +78,18 @@ function Contact() {
             id="phoneNumber"
             value={user.phone}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group">
-          <label htmlFor="userGmail">Your Gmail (optional)</label>
+          <label htmlFor="userGmail">Your Gmail </label>
           <input
             type="email"
             name="email"
             id="userGmail"
             value={user.email}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="form-group">
@@ -80,6 +99,7 @@ function Contact() {
             name="location"
             id="location"
             value={formData.location}
+            required
             onChange={handleChange}
           />
         </div>

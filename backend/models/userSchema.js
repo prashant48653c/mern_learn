@@ -34,6 +34,35 @@ const userSchema = new mongoose.Schema({
         required: true,
 
     },
+    messege:[
+        {
+        name: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true
+        },
+        phone: {
+            type: String,
+            required: true,
+    
+        },
+        feedback: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        location:{
+            type:String,
+            required:true
+        }
+    }
+       
+    ],
     tokens: [
         {
             token: {
@@ -71,6 +100,10 @@ userSchema.methods.generateAuthToken = async function () {
     } catch (err) {
         console.log(err)
     }
+}
+
+userSchema.methods.takeMessege=async function(){
+
 }
 
 const User = mongoose.model("User", userSchema)
