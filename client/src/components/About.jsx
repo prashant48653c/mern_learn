@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from "../assets/a.png"
 import { useNavigate } from 'react-router-dom';
 
 
 function About() {
+  const [user, setuser] = useState([])
   const navigate=useNavigate()
 
   const callAbout=async ()=>{
@@ -19,6 +20,7 @@ function About() {
       });
       const data=await res.json();
       console.log(data)
+      setuser(data)
       if(res.status != 200){
         navigate("/login")
       }
@@ -30,7 +32,8 @@ function About() {
 
   useEffect(()=>{
     callAbout()
-  })
+  },[])
+if(user){
   return (
     <div className="about-me-card">
       <div className="profile-header">
@@ -40,13 +43,14 @@ function About() {
         <button className="edit-profile-button">Edit Profile</button>
       </div>
       <div className="profile-details">
-        <p>Name: {"Prashant Acharya"}</p>
-        <p>Email: {"email@gmail.com"}</p>
-        <p>Phone: {"99988833322"}</p>
-        <p>User ID: {"28462964925492374"}</p>
+        <p>Name: {user?.name }</p>
+        <p>Email: {user?.email} </p>
+        <p>Phone: {user?.phone}</p>
+        <p>User ID: {user?._id}</p>
       </div>
     </div>
   );
+}
 }
 
 export default About;
