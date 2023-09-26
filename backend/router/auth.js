@@ -3,12 +3,14 @@ const User = require("../models/userSchema");
 const express = require("express")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
-const Authenticate = require("../middleware/authenticate");
 const cookieParser = require("cookie-parser")
 
 
 const router = express.Router()
 router.use(cookieParser());
+const Authenticate = require("../middleware/authenticate");
+
+router.use(Authenticate)
 
 router.get("/getdata",Authenticate, async (req, res) => {
     const data = await (req.rootUser)
@@ -86,7 +88,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/signin", async (req, res) => {
     try {
-        const { email, password } = await req.body;
+        const { email, password } =  req.body;
         if (!email || !password) {
             res.status(400).json({ error: "Fill the data properly" })
         }
