@@ -1,11 +1,41 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Contact() {
+  const navigate=useNavigate()
   const { user, setuser, setusermes, userMes } = useContext(UserContext);
-  console.log(user)
+  // console.log(user)
+
+
+  const getData=async ()=>{
+    try{
+      const res=await fetch("http://localhost:3000/getdata",{
+        method:"GET",
+        headers:{
+          Accept:"application/json",
+          "Content-Type":"application/json",
+          
+        },
+        credentials:"include"
+      });
+      const data=await res.json();
+      console.log(data)
+      setuser(data)
+      if(res.status != 200){
+        navigate("/login")
+      }
+
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(()=>{
+    getData()
+  },[])
 
   const [formData, setFormData] = useState({
     name: user.name,
@@ -14,14 +44,14 @@ function Contact() {
     email: user.email,
     location: '',
   });
-  console.log(formData)
+  // console.log(formData)
 
   const handleChange = (e) => {
     e.preventDefault();
 
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    console.log(formData)
+    // console.log(formData)
   };
 
   const handleSubmit = async (e) => {
@@ -39,7 +69,7 @@ function Contact() {
         })
       })
       const data = await res.json()
-      console.log(data)
+      // console.log(data)
       setusermes(data)
       if (data) {
         window.alert("Succesfully sent")

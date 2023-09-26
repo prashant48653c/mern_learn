@@ -8,11 +8,11 @@ function About() {
   const navigate=useNavigate()
 
   const {user,setuser} = useContext(UserContext);
-  console.log(user)
+  // console.log(user)
 
   const callAbout=async ()=>{
     try{
-      const res=await fetch("http://localhost:3000/about",{
+      const res=await fetch("http://localhost:3000/getdata",{
         method:"GET",
         headers:{
           Accept:"application/json",
@@ -21,8 +21,8 @@ function About() {
         },
         credentials:"include"
       });
-      const data=await res.json();
-      console.log(data)
+      const data= await res.json();
+      console.log(data ,"getdata")
       setuser(data)
       if(res.status != 200){
         navigate("/login")
