@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const navigate = useNavigate()
+  
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,19 +21,19 @@ function Login() {
 
     const res = await fetch("http://localhost:3000/signin", {
       method: "POST",
-      credentials:"include",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
         email, password
-      })  
+      })
     })
 
     const data = await res.json();
-    if (!data || res.status=== 404 ) {
+    if (!data || res.status === 404) {
       window.alert("Login Declined")
-      
+
     } else {
       window.alert("Login succesfull")
 

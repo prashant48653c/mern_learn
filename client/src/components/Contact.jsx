@@ -4,7 +4,7 @@ import { UserContext } from '../App';
 
 
 function Contact() {
-  const {user,setuser,setusermes,userMes} = useContext(UserContext);
+  const { user, setuser, setusermes, userMes } = useContext(UserContext);
   console.log(user)
 
   const [formData, setFormData] = useState({
@@ -25,30 +25,30 @@ function Contact() {
   };
 
   const handleSubmit = async (e) => {
-    try{
+    try {
       e.preventDefault();
-      const { name,email,phone,feedback,location }=formData;
-      
-      const res =await fetch("http://localhost:3000/contact",{
-       method:'POST',
-       headers:{
-         "Content-Type":"application/json"
-       },
-       body:JSON.stringify({
-         name,email,feedback,phone,location
-       })
+      const { name, email, phone, feedback, location } = formData;
+
+      const res = await fetch("http://localhost:3000/contact", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name, email, feedback, phone, location
+        })
       })
-      const data=await res.json()
+      const data = await res.json()
       console.log(data)
       setusermes(data)
-      if(data){
+      if (data) {
         window.alert("Succesfully sent")
       }
-   
-    }catch(err){
+
+    } catch (err) {
       console.log(err)
     }
-   
+
 
   };
 
@@ -67,7 +67,7 @@ function Contact() {
             required
           />
         </div>
-       
+
         <div className="form-group">
           <label htmlFor="feedback">Feedback</label>
           <textarea

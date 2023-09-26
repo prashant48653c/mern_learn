@@ -10,6 +10,10 @@ const cookieParser = require("cookie-parser")
 const router = express.Router()
 router.use(cookieParser());
 
+router.get("/getdata",async(req,res)=>{
+    
+})
+
 
 
 router.post("/contact", async (req, res) => {
@@ -18,11 +22,16 @@ router.post("/contact", async (req, res) => {
         if (!name || !email || !feedback || !phone || !location) {
             res.status(404).json({ error: "fill the form carefully" })
         }
+        const userid=await req.userID
+        console.log(userid)
 
-        const userContact = await User.findOne({ _id: req.userID })
+        const userContact = await User.findOne({ _id: userid })
+       
         if (userContact) {
             const messege = await userContact.takeMessege(name, email, phone, feedback, location);
+
             await userContact.save()
+             
             res.status(201).json({ messege: "data added" })
         }else{
             res.status(400).json({messege:"Not done"})
