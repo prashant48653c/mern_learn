@@ -10,7 +10,7 @@ function About() {
   const {user,setuser} = useContext(UserContext);
   // console.log(user)
 
-  const callAbout=async ()=>{
+   const callAbout=async ()=>{
     try{
       const res=await fetch("http://localhost:3000/getdata",{
         method:"GET",
