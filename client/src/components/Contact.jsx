@@ -61,6 +61,7 @@ function Contact() {
 
       const res = await fetch("http://localhost:3000/contact", {
         method: 'POST',
+        credentials:"include",
         headers: {
           "Content-Type": "application/json"
         },

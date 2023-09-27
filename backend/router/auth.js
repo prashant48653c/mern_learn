@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser")
 const Authenticate = require("../middleware/authenticate");
 
 
-const router = express()
+const router = express.Router();
 router.use(cookieParser());
 router.use(express.json())
 
@@ -25,8 +25,8 @@ router.get("/getdata",Authenticate, async (req, res) => {
 
 
 
-router.post("/contact", async (req, res) => {
-    console.log( req.cookies)
+router.post("/contact",Authenticate, async (req, res) => {
+    // console.log( req.cookies ,"tokensss")
     try {
         
         const { name, email, feedback, phone, location } = await req.body;
@@ -114,7 +114,7 @@ router.post("/signin",  async (req, res) => {
             })
 
             res.status(201).json({ messege: "Succesfully logined" })
-            console.log(req.cookies.jwt)
+            // console.log(req.cookies.jwtoken)
         }
     } catch (err) {
         res.status(404).json({ error: "Cannot login" })

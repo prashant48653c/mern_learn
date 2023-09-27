@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser")
  
 const app = express()
 app.use(cookieParser());
+app.use(express.json()) 
 
 
 dotenv.config({ path: './.env' })
@@ -19,7 +20,7 @@ methods:"GET,HEAD,PUT,PATCH,POST,DELETE",
 credentials:true
 }));
 
-app.use(express.json()) 
+
   //to accept json from api
 app.use(router)
 

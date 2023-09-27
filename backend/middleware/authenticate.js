@@ -13,13 +13,8 @@ router.use(cookieParser());
 const Authenticate = async (req, res, next) => {
 
     try {
-        console.log(req.cookies)
-
 
         let token = await req.cookies.jwtoken;
-
-        console.log(req.cookies, "tokens")
-        console.log("token", token)
         if (!token) {
             console.log("Token didnt came")
         }
