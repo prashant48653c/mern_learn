@@ -35,6 +35,7 @@ connectDB(DB)   //Mongo function called
 
 app.get("/",async (req, res) => {
     res.send(`Home page`)
+    // console.log(req.cookies)
 
 
 })

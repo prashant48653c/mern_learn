@@ -4,13 +4,14 @@ const express = require("express")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser")
-
-
-const router = express.Router()
-router.use(cookieParser());
 const Authenticate = require("../middleware/authenticate");
 
-router.use(Authenticate)
+
+const router = express()
+router.use(cookieParser());
+router.use(express.json())
+
+
 
 router.get("/getdata",Authenticate, async (req, res) => {
     const data = await (req.rootUser)
@@ -24,8 +25,10 @@ router.get("/getdata",Authenticate, async (req, res) => {
 
 
 
-router.post("/contact",Authenticate, async (req, res) => {
+router.post("/contact", async (req, res) => {
+    console.log( req.cookies)
     try {
+        
         const { name, email, feedback, phone, location } = await req.body;
         if (!name || !email || !feedback || !phone || !location) {
             res.status(404).json({ error: "fill the form carefully" })
@@ -86,7 +89,7 @@ router.post("/register", async (req, res) => {
 
 
 
-router.post("/signin", async (req, res) => {
+router.post("/signin",  async (req, res) => {
     try {
         const { email, password } =  req.body;
         if (!email || !password) {

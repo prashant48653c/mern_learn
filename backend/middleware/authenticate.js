@@ -1,20 +1,30 @@
 
- 
+const express = require("express")
 const User = require("../models/userSchema")
 const Jwt = require("jsonwebtoken")
 
+const cookieParser = require("cookie-parser")
+
+
+const router = express.Router()
+router.use(cookieParser());
+
 
 const Authenticate = async (req, res, next) => {
-    try {
-        const token = await req.cookies.jwtoken;
 
-        console.log( req.cookies ,"tokens")
-        console.log( "token", token)
-        if(!token){
+    try {
+        console.log(req.cookies)
+
+
+        let token = await req.cookies.jwtoken;
+
+        console.log(req.cookies, "tokens")
+        console.log("token", token)
+        if (!token) {
             console.log("Token didnt came")
         }
-        const verifyToken =Jwt.verify(token, process.env.SECRET_KEY);
-        if(verifyToken){
+        const verifyToken = Jwt.verify(token, process.env.SECRET_KEY);
+        if (verifyToken) {
             console.log(verifyToken)
         }
 
@@ -27,10 +37,10 @@ const Authenticate = async (req, res, next) => {
             req.userID = rootUser._id;
             next()
         }
-       
+
 
     } catch (err) {
-      
+
         console.log(err)
         res.status(401).json({ error: "User not Found " });
 
