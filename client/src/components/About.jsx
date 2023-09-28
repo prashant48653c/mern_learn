@@ -8,6 +8,7 @@ function About() {
   const navigate=useNavigate()
 
   const {user,setuser} = useContext(UserContext);
+  
   // console.log(user)
 
    const callAbout=async ()=>{

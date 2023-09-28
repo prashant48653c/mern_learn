@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
 
 const Home = () => {
+ 
+ 
+  
+  const navigate=useNavigate()
   const [name,setName]=useState([])
+  console.log(name)
+
+  
+  
+
 
   const callAbout=async ()=>{
     try{
@@ -17,8 +28,9 @@ const Home = () => {
       const data= await res.json();
       console.log(data ,"getdata")
       setName(data)
+      setIsToken(true)
       if(res.status != 200){
-        navigate("/login")
+      console.log("User not logged in")
       }
 
     }catch(err){
@@ -37,7 +49,7 @@ const Home = () => {
     <section className="hero-section">
         <div className="head-text">
         {
-  name ? (
+  name.name  ? (
     <>
       <p>Welcome {name.name}</p>
        <p>Nice to see you again</p>

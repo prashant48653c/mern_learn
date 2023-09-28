@@ -130,6 +130,14 @@ router.get("/about", Authenticate, (req, res) => {
 
 })
 
+router.get("/logout",async (req, res) => {
+    res.clearCookie('jwtoken');
+    console.log("cookie clear")
+    res.status(200).json({messege:"User has been logged out"})
+
+
+})
+
 
 module.exports = router
 

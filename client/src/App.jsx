@@ -8,6 +8,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Error from './components/Error'
+import Logout from './components/logout'
  
 
 
@@ -16,6 +17,7 @@ export const UserContext = createContext()
 function App() {
   const [user, setuser] = useState([])
   const [userMes, setusermes] = useState([])
+  
 
 
   return (
@@ -33,6 +35,8 @@ function App() {
 <Route path='/login' element={ <Login/> } />
 
 <Route path='/signup' element={ <Signup/> } />
+<Route path='/logout' element={ <Logout/> } />
+
 
        
      
