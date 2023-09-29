@@ -4,6 +4,7 @@ import { UserContext } from '../App';
 
 const logout = () => {
     const navigate=useNavigate()
+  const {user,setuser} = useContext(UserContext);
     
 
     const getLogOut=async ()=>{
@@ -19,7 +20,7 @@ const logout = () => {
           });
           const data= await res.json();
           if(data){
-         
+         setuser("")
             navigate("/")
           }
     
