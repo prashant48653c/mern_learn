@@ -24,20 +24,32 @@ function About() {
       });
       const data= await res.json();
       console.log(data ,"getdata")
-      setuser(data)
       if(res.status != 200){
+        setuser("")
         navigate("/login")
+      }else{
+        setuser(data)
+
       }
 
     }catch(err){
       console.log(err)
     }
   }
+  console.log(user)
 
   useEffect(()=>{
-    callAbout()
+   
+      callAbout()
+      if(user==="" || []){
+        navigate("/login")
+      console.log("user is not")
+      } 
+
   },[])
-if(user){
+ 
+
+
   return (
     <div className="about-me-card">
       <div className="profile-header">
@@ -55,6 +67,6 @@ if(user){
     </div>
   );
 }
-}
+
 
 export default About;

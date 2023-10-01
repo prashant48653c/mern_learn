@@ -16,9 +16,13 @@ function Login() {
   };
 
   const handleSubmit = async (e) => {
+   
     e.preventDefault();
     const { email, password } = formData;
+    try{
 
+    
+    console.log("submitted")
     const res = await fetch("http://localhost:3000/signin", {
       method: "POST",
       credentials: "include",
@@ -29,16 +33,20 @@ function Login() {
         email, password
       })
     })
+    
+
 
     const data = await res.json();
-    if (!data || res.status === 404) {
-      window.alert("Login Declined")
-
-    } else {
+    console.log(data)
+    if (data || res.status != 404) {
+     
+      console.log("succesfull login")
       window.alert("Login succesfull")
-
       navigate("/")
     }
+  }catch(err){
+    console.log(err)
+  }
   };
 
   return (

@@ -28,9 +28,10 @@ const Home = () => {
       const data= await res.json();
       console.log(data ,"getdata")
       setName(data)
-      setIsToken(true)
+      
       if(res.status != 200){
       console.log("User not logged in")
+      setName('')
       }
 
     }catch(err){

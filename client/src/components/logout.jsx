@@ -19,18 +19,23 @@ const logout = () => {
             credentials:"include"
           });
           const data= await res.json();
+          console.log(data)
           if(data){
          setuser("")
             navigate("/")
+            window.location.reload()
           }
     
         }catch(err){
           console.log(err)
         }
       }
-      useEffect(()=>{
+    
+       useEffect(()=>{
         getLogOut()
-      },[])
+
+       })
+   
 
   return (
     <div>logout</div>

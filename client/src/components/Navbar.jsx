@@ -7,7 +7,7 @@ const Navbar = () => {
   const {user,setuser} = useContext(UserContext);
    
 
- 
+ console.log(user,"Navbar")
 
     const navigate=useNavigate()
     return (
@@ -44,24 +44,29 @@ const Navbar = () => {
                            
 
                       {
-                        user!=[] ?
+                        !user ?
+                         (
                         <>
                                  <li className="nav-item">
                                 <Link className="nav-link" to="/logout">Logout</Link>
                             </li>
                         
                         </>
+                        )
                         :
-                        <>
+                        (
+                            <>
                         
-                                <li className="nav-item">
-                                <Link className="nav-link" to="/login">Login</Link>
-                            </li>
-
                             <li className="nav-item">
-                                <Link className="nav-link" to="/signup">SignUp</Link>
-                            </li>
-                        </>
+                            <Link className="nav-link" to="/login">Login</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/signup">SignUp</Link>
+                        </li>
+                    </>
+                        )
+                       
                       }
                                 
                                 

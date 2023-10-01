@@ -25,6 +25,7 @@ function Contact() {
       console.log(data)
       setuser(data)
       if(res.status != 200){
+      setuser("")
         navigate("/login")
       }
 
@@ -38,10 +39,10 @@ function Contact() {
   },[])
 
   const [formData, setFormData] = useState({
-    name: user.name,
+    name: user.name ?user.name : '',
     feedback: '',
-    phone: user.phone,
-    email: user.email,
+    phone: user.phone ?user.phone : '',
+    email: user.email ?user.email : '',
     location: '',
   });
   // console.log(formData)
