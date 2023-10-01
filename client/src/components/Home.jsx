@@ -38,9 +38,10 @@ const Home = () => {
       console.log(err)
     }
   }
-  useEffect(()=>{
-    callAbout()
-  },[])
+  useEffect(()=>{  
+      callAbout()
+
+  },[user])
   console.log(name)
 
   return (

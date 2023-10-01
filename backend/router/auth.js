@@ -14,9 +14,9 @@ router.use(express.json())
 
 
 router.get("/getdata",Authenticate, async (req, res) => {
-    const data = await (req.rootUser)
+    const data =  req.rootUser
     if (!data) {
-        res.status(400).json({ error: "not" })
+        res.status(400).json({ error: "New user" })
     }else{
         res.status(200).send(data)
 
