@@ -40,10 +40,10 @@ function About() {
 
   useEffect(()=>{
    
-      callAbout()
-      if(user==="" || []){
-        navigate("/login")
-      console.log("user is not")
+    
+      if(user=="" || []){
+        callAbout()
+         
       } 
 
   },[])

@@ -72,7 +72,7 @@ function Contact() {
       })
       const data = await res.json()
       // console.log(data)
-      setusermes(data)
+      setuser(data)
       if (data) {
         window.alert("Succesfully sent")
       }
