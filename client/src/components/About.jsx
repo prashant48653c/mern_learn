@@ -27,10 +27,10 @@ function About() {
       if(res.status != 200){
         setuser("")
         navigate("/login")
-      }else{
+      }
         setuser(data)
 
-      }
+      
 
     }catch(err){
       console.log(err)

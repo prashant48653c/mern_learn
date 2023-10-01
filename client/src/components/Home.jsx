@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../App';
 
 const Home = () => {
+  const { user, setuser, setusermes, userMes } = useContext(UserContext);
  
  
   
   const navigate=useNavigate()
   const [name,setName]=useState([])
-  console.log(name)
+  
 
   
   
@@ -27,8 +28,7 @@ const Home = () => {
       });
       const data= await res.json();
       console.log(data ,"getdata")
-      setName(data)
-      
+      setuser(data)
       if(res.status != 200){
       console.log("User not logged in")
       setName('')
@@ -50,9 +50,9 @@ const Home = () => {
     <section className="hero-section">
         <div className="head-text">
         {
-  name.name  ? (
+  user.name  ? (
     <>
-      <p>Welcome {name.name}</p>
+      <p>Welcome {user.name}</p>
        <p>Nice to see you again</p>
     </>
   ) : (
