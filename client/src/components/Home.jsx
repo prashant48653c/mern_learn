@@ -4,68 +4,68 @@ import { UserContext } from '../App';
 
 const Home = () => {
   const { user, setuser, setusermes, userMes } = useContext(UserContext);
- 
- 
-  
-  const navigate=useNavigate()
-  const [name,setName]=useState([])
-  
-
-  
-  
 
 
-  const callAbout=async ()=>{
-    try{
-      const res=await fetch("http://localhost:3000/getdata",{
-        method:"GET",
-        headers:{
-          Accept:"application/json",
-          "Content-Type":"application/json",
-          
+
+  const navigate = useNavigate()
+  const [name, setName] = useState([])
+
+
+
+
+
+
+  const callAbout = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/getdata", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+
         },
-        credentials:"include"
+        credentials: "include"
       });
-      const data= await res.json();
-      console.log(data ,"getdata")
+      const data = await res.json();
+      console.log(data, "getdata")
       setuser(data)
-      if(res.status != 200){
-      console.log("User not logged in")
-      setName('')
+      if (res.status != 200) {
+        console.log("User not logged in")
+        setName('')
       }
 
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
-  useEffect(()=>{  
-      callAbout()
+  useEffect(() => {
+    callAbout()
 
-  },[user])
+  }, [user])
   console.log(name)
 
   return (
     <>
 
 
-    <section className="hero-section">
+      <section className="hero-section">
         <div className="head-text">
-        {
-  user.name  ? (
-    <>
-      <p>Welcome {user.name}</p>
-       <p>Nice to see you again</p>
-    </>
-  ) : (
-    <p>We are the MERN developer</p>
-  )
-}
+          {
+            user.name ? (
+              <>
+                <p>Welcome {user.name}</p>
+                <p>Nice to see you again</p>
+              </>
+            ) : (
+              <p>We are the MERN developer</p>
+            )
+          }
 
-          
+
         </div>
-    </section>
-    
-    
+      </section>
+
+
     </>
   )
 }
