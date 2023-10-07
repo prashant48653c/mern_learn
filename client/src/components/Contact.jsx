@@ -5,44 +5,44 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Contact() {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const { user, setuser, setusermes, userMes } = useContext(UserContext);
   // console.log(user)
 
 
-  const getData=async ()=>{
-    try{
-      const res=await fetch("http://localhost:3000/getdata",{
-        method:"GET",
-        headers:{
-          Accept:"application/json",
-          "Content-Type":"application/json",
-          
+  const getData = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/getdata", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+
         },
-        credentials:"include"
+        credentials: "include"
       });
-      const data=await res.json();
+      const data = await res.json();
       console.log(data)
       setuser(data)
-      if(res.status != 200){
-      setuser("")
+      if (res.status != 200) {
+        setuser("")
         navigate("/login")
       }
 
-    }catch(err){
+    } catch (err) {
       console.log(err)
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
   const [formData, setFormData] = useState({
-    name: user.name ?user.name : '',
+    name: user.name ? user.name : '',
     feedback: '',
-    phone: user.phone ?user.phone : '',
-    email: user.email ?user.email : '',
+    phone: user.phone ? user.phone : '',
+    email: user.email ? user.email : '',
     location: '',
   });
   // console.log(formData)
@@ -62,7 +62,7 @@ function Contact() {
 
       const res = await fetch("http://localhost:3000/contact", {
         method: 'POST',
-        credentials:"include",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json"
         },
